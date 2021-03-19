@@ -1,4 +1,2 @@
-include ':imgSearchList'
 include ':imgSearch'
-include ':imgSearchList'
 rootProject.name = "zmdlab-kotlin"
