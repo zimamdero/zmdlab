@@ -1,0 +1,2 @@
+include ':samplegoogleimgsearch'
+rootProject.name = "zmdlab-kotlin"
