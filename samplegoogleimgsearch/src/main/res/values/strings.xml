@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SampleGoogleImgSearch</string>
 
-    <string name="searching_img">Searching Image</string>
+    <string name="searching_img">Searching Cat</string>
     <string name="searching_count">Searching Count</string>
 </resources>

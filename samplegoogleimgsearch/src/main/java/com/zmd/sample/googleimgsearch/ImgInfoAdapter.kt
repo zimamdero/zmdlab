@@ -1,8 +1,6 @@
 package com.zmd.sample.googleimgsearch
 
 import android.app.Activity
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zmd.lab.search.img.model.ImgInfo
-import java.net.URL
 
 class ImgInfoAdapter(private val activity: Activity, private val onClick: (ImgInfo) -> Unit) :
     ListAdapter<ImgInfo, ImgInfoAdapter.ImgInfoViewHolder>(ImgInfoDiffCallback) {
@@ -36,20 +34,9 @@ class ImgInfoAdapter(private val activity: Activity, private val onClick: (ImgIn
             currentInfo = info
             textView.text = info.title
             if (info.origin.isNotEmpty()) {
-                loadImg(info.origin) {
-                    activity.runOnUiThread(Runnable {
-                        imgView.setImageBitmap(it)
-                    })
-                }
+                //Glide.with(activity).load(info.origin).centerCrop().into(imgView)
+                Glide.with(activity).load(info.origin).into(imgView)
             }
-        }
-
-        private fun loadImg(origin: String, callback: (bitmap: Bitmap) -> Unit) {
-            Thread(Runnable {
-                val url = URL(origin)
-                val bitmap = BitmapFactory.decodeStream(url.openStream())
-                callback(bitmap)
-            }).start()
         }
     }
 

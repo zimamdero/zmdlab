@@ -8,6 +8,7 @@
         android:id="@+id/search_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/searching_img"
         android:textAppearance="?attr/textAppearanceHeadline3"/>
 
@@ -15,6 +16,7 @@
         android:id="@+id/search_count_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/searching_count"
         android:textAppearance="?attr/textAppearanceHeadline6"/>
 

@@ -13,9 +13,9 @@ import com.zmd.lab.search.img.GoogleImgSearch
 import com.zmd.lab.search.img.model.ImgInfo
 
 class MainActivity : AppCompatActivity() {
-    private val listViewModel by viewModels<ListViewModel> {
-        ListViewModelFactory(ArrayList<ImgInfo>())
-    }
+//    private val listViewModel by viewModels<ListViewModel> {
+//        ListViewModelFactory(ArrayList<ImgInfo>())
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,18 +28,31 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.adapter = concatAdapter
 
-        listViewModel.liveData.observe(this, {
-            it?.let {
-                imgInfoAdapter.submitList(it as MutableList<ImgInfo>)
-                headerAdapter.updateCount(it.size)
-            }
-        })
+//        listViewModel.liveData.observe(this, {
+//            it?.let {
+//                imgInfoAdapter.submitList(it as MutableList<ImgInfo>)
+//                headerAdapter.updateCount(it.size)
+//            }
+//        })
 
         GoogleImgSearch().startSearch("cat") { imgInfoList ->
             for (info in imgInfoList) {
                 Log.d("zmdlab", info.toString())
-                listViewModel.insert(info)
+                //listViewModel.insert(info)
             }
+
+            runOnUiThread(Runnable {
+                val listViewModel by viewModels<ListViewModel> {
+                    ListViewModelFactory(imgInfoList)
+                }
+
+                listViewModel.liveData.observe(this, {
+                    it?.let {
+                        imgInfoAdapter.submitList(it as MutableList<ImgInfo>)
+                        headerAdapter.updateCount(it.size)
+                    }
+                })
+            })
         }
     }
 
