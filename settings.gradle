@@ -1,2 +1,3 @@
+include ':systemfontlist'
 include ':samplegoogleimgsearch'
 rootProject.name = "zmdlab-kotlin"
