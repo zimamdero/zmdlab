@@ -18,6 +18,7 @@ class ImgInfoAdapter(private val activity: Activity, private val onClick: (ImgIn
     class ImgInfoViewHolder(itemView: View, activity: Activity, val onClick: (ImgInfo) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(R.id.title)
+        private val backTextView: TextView = itemView.findViewById(R.id.title_back)
         private val imgView: ImageView = itemView.findViewById(R.id.img)
         private var currentInfo: ImgInfo? = null
         private val activity = activity
@@ -33,6 +34,7 @@ class ImgInfoAdapter(private val activity: Activity, private val onClick: (ImgIn
         fun bind(info: ImgInfo) {
             currentInfo = info
             textView.text = info.title
+            backTextView.text = info.title
             if (info.origin.isNotEmpty()) {
                 //Glide.with(activity).load(info.origin).centerCrop().into(imgView)
                 Glide.with(activity).load(info.origin).into(imgView)

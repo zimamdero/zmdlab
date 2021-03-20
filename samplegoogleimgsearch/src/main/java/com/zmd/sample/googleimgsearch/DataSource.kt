@@ -20,6 +20,17 @@ class DataSource(list: ArrayList<ImgInfo>) {
     private val imgInfoList = list
     private val liveData = MutableLiveData(imgInfoList)
 
+    fun addList(list: ArrayList<ImgInfo>) {
+        val currentList = liveData.value
+        if (currentList == null) {
+            liveData.postValue(list)
+        } else {
+            val updatedList = currentList.toMutableList()
+            updatedList.addAll(0, list)
+            liveData.postValue(updatedList as ArrayList<ImgInfo>?)
+        }
+    }
+
     fun add(info: ImgInfo) {
         val currentList = liveData.value
         if (currentList == null) {
@@ -47,7 +58,7 @@ class DataSource(list: ArrayList<ImgInfo>) {
         return null
     }
 
-    fun getInfoList(): LiveData<ArrayList<ImgInfo>> {
+    fun getLiveData(): LiveData<ArrayList<ImgInfo>> {
         return liveData
     }
 

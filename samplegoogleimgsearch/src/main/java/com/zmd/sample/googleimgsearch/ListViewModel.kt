@@ -5,13 +5,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.zmd.lab.search.img.model.ImgInfo
 
 class ListViewModel(val dataSource: DataSource): ViewModel() {
-    val liveData = dataSource.getInfoList()
+    val liveData = dataSource.getLiveData()
+
+    fun insertList(list: ArrayList<ImgInfo>) {
+        if (list.size < 1) return
+        dataSource.addList(list)
+    }
 
     fun insert(info: ImgInfo) {
-        if (info == null) {
-            return
-        }
-
+        if (info == null) return
         dataSource.add(info)
     }
 }
